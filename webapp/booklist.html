@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issue Book</title>
+</head>
+<body>
+    <h1>Issue Book</h1>
+    <form action="issue" method="post">
+        <input type="hidden" name="bookId" id="bookId">
+        <label for="issueDate">Issue Date:</label>
+        <input type="date" name="issueDate" required><br>
+        <label for="returnDate">Return Date:</label>
+        <input type="date" name="returnDate" required><br>
+        <button type="submit">Issue Book</button>
+    </form>
+    
+    <script>
+        // Extract bookId from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('id');
+        if (bookId) {
+            document.getElementById('bookId').value = bookId;
+        }
+        
+        // Set default dates (today and 14 days from now)
+        const today = new Date();
+        const returnDate = new Date();
+        returnDate.setDate(today.getDate() + 14);
+        
+        document.querySelector('input[name="issueDate"]').valueAsDate = today;
+        document.querySelector('input[name="returnDate"]').valueAsDate = returnDate;
+    </script>
+</body>
+</html>
